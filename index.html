@@ -4,9 +4,24 @@
   <meta charset="UTF-8">
   <title>Superhero Phone Book</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
   <script src="app.js"></script>
 </head>
-<body>
+<body ng-app="superApp" ng-controller="SupersController as vm">
+<h1>Superhero Phonebook</h1>
+<section >
+<ul>
+  <label> Search <input ng-model="search.name"></label>
+  <li ng-repeat="super in vm.supers | filter:search" ng-class="super.comics_affiliation === 'DC' ? 'dc' : 'marvel'">
+    <h2>Name: {{super.name}}</h2>
+    <h3>#: {{super.phone_number}}</h3>
+    <h3>Affiliation: {{super.comics_affiliation}}</h3>
+    <img ng-src="{{super.img_url}}" alt="Hero Pic" ng-show="vm.toggle[$index]"/>
+    <br>
+    <button ng-click="vm.toggle[$index] = !vm.toggle[$index]">Image</button>
+
+  </li>
+</ul>
+</section>
 </body>
 </html>
